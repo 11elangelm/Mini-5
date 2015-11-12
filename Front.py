@@ -10,27 +10,27 @@ class Front:
     maxST = 0.0
     maxTR = 0.0
     
-    #funcion de retorno de iteraciones
-    def TL(self,x):
-        if (x<-7.5):
+    
+    def TR(self,x):
+        if (x<-90):
             return 1
-        elif (-7.5<=x<0):
-            return -2.0/15*x
+        elif (-90<=x<-30):
+            return -1.0/30*(x+30)
         return 0
         
     def ST(self,x):
-        if (x<-7.5):
+        if (x<-45):
             return 0
-        elif (-7.5<=x<0):
-            return 2.0/15*x+1
-        elif (0<=x<7.5):
-            return -2.0/15*x+1
+        elif (-45<=x<0):
+            return 1.0/45*(x+45)
+        elif (0<=x<45):
+            return -1.0/45*(x+45)
         return 0
         
-    def TR(self,x):
-        if (0<x<=7.5):
-            return 2.0/15*x
-        elif (7.5<x):
+    def TL(self,x):
+        if (30<x<=90):
+            return 1.0/30*(x-30)
+        elif (90<x):
             return 1
         return 0
      
@@ -61,3 +61,18 @@ class Front:
             x3 = self.maxTR
         
         return max([x1,x2,x3])
+        
+    def evalFuncUp(self,x):
+        x1 = self.TL(x)
+        if (x1>self.maxTL):
+            x1 = self.maxTL
+        
+        x2 = self.ST(x)
+        if (x2>self.maxST):
+            x2 = self.maxST
+            
+        x3 = self.TR(x)
+        if (x3>self.maxTR):
+            x3 = self.maxTR
+        
+        return max([x1,x2,x3])*x

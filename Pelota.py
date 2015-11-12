@@ -12,7 +12,7 @@ from math import sqrt
 class Pelota:
     posicion = array([])#posicion x,y
     direccion  = array([])#velocidad vector x,y
-    radio = 10.0#radio para verificar si ha tocado
+    radio = 30.0#radio para verificar si ha tocado
         
     def __init__(self,pos = [0,0], vel = [0,0]):
         self.posicion = array(pos)

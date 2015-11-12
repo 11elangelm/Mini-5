@@ -5,7 +5,8 @@ Created on Mon Nov 09 17:41:38 2015
 @author: Kevin
 """
 from pylab import array
-from math import tan, pi, sqrt
+from math import  pi, cos, sin
+import numpy as np
 
 #un robot tiene posicion (x,y) y velocidad (x,y)
 class Robot:
@@ -14,6 +15,7 @@ class Robot:
     angulo = 0.0#angulo 0<theta<306
     rangulo = 0.0#angulo "real"
     longitud = 10.0#longitud absoluta de movimiento
+    error = 10.0
     
         
     def __init__(self,pos = [0,0], vel = [0,0]):
@@ -32,9 +34,8 @@ class Robot:
         
     def setAngle(self,angle):
         #suponemos que el angulo es en grados y 0<theta<360
-        x = round(sqrt(self.longitud**2/(1+tan(angle/360.0*pi)**2)),0)
-        y = round(x*tan(angle/360.0*pi),0)
-        self.velocidad = array([x,y])
+        
+        self.velocidad = self.longitud*array([cos(angle/180.0*pi),-sin(angle/180.0*pi)])
         self.angulo = angle
         self.rangulo = angle
         
@@ -55,3 +56,6 @@ class Robot:
         
     def getOrAng(self):
         return self.rangulo
+        
+    def shotError(self):
+        return np.random.normal(0,self.error,1)
